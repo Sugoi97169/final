@@ -2,7 +2,7 @@ PImage player;
 PImage bullet;
 PImage enemy;
 PImage background;
-int px =240,py=240;
+int px =140,py=240;
 float bulletx =-20;
 float bullety =-20;
 float ex=590;
@@ -36,27 +36,36 @@ if(ex==-50){
   keyPressed();
   boom();
   text("Score:"+score, 5, 10);
+  text("life:"+life, 5, 20);
+      if(life<=0)
+       text("gave over", 310, 240);
+        
+       else if(score>=10)
+       text("win", 320, 240);
+  
+  
 }
 
-void  keyPressed() {
+void  keyPressed() {//move
   if (keyPressed) {
     if (key == 'w'||key == 'W') {
-  py-=5;
+      if (py>0)   //boundary
+    py-=5;
 
     }
-    if (key == 's'||key == 'S') {
-
+    else if (key == 's'||key == 'S') {
+     if (py<400)
         py+=5;
 
     }
-    if (key == 'a'||key == 'A') {
-
+    else if (key == 'a'||key == 'A') {
+      if (px>0)
         px -= 5;
 
      
     }
-    if (key == 'd'||key == 'D') {
-      
+    else if (key == 'd'||key == 'D') {
+      if (px<560)
         px += 5;
    
 
@@ -109,5 +118,7 @@ void boom() {
   if (pxb >exs && exb > pxs &&
     pyb > eys && eyb > pys) {
     life--;
+      
+    
   }
 }
