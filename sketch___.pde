@@ -2,7 +2,7 @@ PImage player;
 PImage bullet;
 PImage enemy;
 PImage background;
-int px =240,py=240;
+int px =140,py=240;
 float bulletx =-20;
 float bullety =-20;
 float ex=590;
@@ -24,7 +24,7 @@ void setup() {
 void draw() {
 image(background,0,0,640,480);
 image( player, px, py,80,80);
-image(bullet,bulletx,bullety,20,20); 
+image(bullet,bulletx,bullety,30,30); 
 image(enemy,ex,ey,50,50);
 
 ex-=5;
@@ -36,28 +36,44 @@ if(ex==-50){
   keyPressed();
   boom();
   text("Score:"+score, 5, 10);
+  text("life:"+life, 5, 20);
+      if(life==0)
+       text("gave over", 310, 240);
+        
+       else if(score>=10)
+       text("win", 320, 240);
+  
+  
 }
 
-void  keyPressed() {
+void  keyPressed() {//move
   if (keyPressed) {
     if (key == 'w'||key == 'W') {
-  py-=5;
+      if (py>0)   //boundary
+    py-=5;
 
     }
-    if (key == 's'||key == 'S') {
-
+    else if (key == 's'||key == 'S') {
+     if (py<400)
         py+=5;
 
     }
-    if (key == 'a'||key == 'A') {
-
+    else if (key == 'a'||key == 'A') {
+      if (px>0)
         px -= 5;
 
      
     }
-    if (key == 'd'||key == 'D') {
-      
+    else if (key == 'd'||key == 'D') {
+      if (px<560)
         px += 5;
+   
+
+    }
+    
+        else if (key == 'r'||key == 'R') {
+     score =0;
+     life =3;
    
 
     }
@@ -68,11 +84,11 @@ void  keyPressed() {
 
 void mouseReleased(){
   bulletx = px;
-  bullety =py;
+  bullety =py+25;
 
    for(int i =0;i<=20;i++){
             bulletx+=10;
- image(bullet,bulletx,bullety,10,10);
+ image(bullet,bulletx,bullety,30,30);
    }
               
     
@@ -88,18 +104,18 @@ image( player, px, py,80,80);
 }
 
 void boom() {
-  exb = ex+20/2;
-  exs = ex-20/2;
-  eyb = ey+20/2;
-  eys = ey-20/2;
-  bxb = bulletx+20/2;
-  bxs = bulletx+20/2;
-  byb = bullety+20/2;
-  bys = bullety+20/2;
-  pxb = px+20/2;
-  pxs = px+20/2;
-  pyb = py+20/2;
-  pys= py+20/2;
+  exb = ex+50/2;
+  exs = ex-50/2;
+  eyb = ey+50/2;
+  eys = ey-50/2;
+  bxb = bulletx+30/2;
+  bxs = bulletx+30/2;
+  byb = bullety+30/2;
+  bys = bullety+30/2;
+  pxb = px+80/2;
+  pxs = px+80/2;
+  pyb = py+80/2;
+  pys= py+80/2;
 
   if (pxb >exs && exb > pxs &&
     pyb > eys && eyb > pys) {
@@ -109,5 +125,8 @@ void boom() {
   if (pxb >exs && exb > pxs &&
     pyb > eys && eyb > pys) {
     life--;
+      px = 140;
+      py =240;
+    
   }
 }
