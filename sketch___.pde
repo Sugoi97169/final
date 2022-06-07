@@ -37,10 +37,10 @@ if(ex==-50){
   boom();
   text("Score:"+score, 5, 10);
   text("life:"+life, 5, 20);
-      if(life==0)
+      if(life<0)
        text("gave over", 310, 240);
         
-       else if(score>=10)
+       else if(score>=3)
        text("win", 320, 240);
   
   
@@ -82,13 +82,14 @@ void  keyPressed() {//move
 }
 
 
-void mouseReleased(){
-  bulletx = px;
+void mousePressed(){
+  bulletx = px+40;
   bullety =py+25;
 
-   for(int i =0;i<=20;i++){
-            bulletx+=10;
- image(bullet,bulletx,bullety,30,30);
+   for(int i =0;i<=200;i++){
+            bulletx+=100;
+            image(bullet,bulletx,bullety,60,60);
+ 
    }
               
     
@@ -108,10 +109,10 @@ void boom() {
   exs = ex-50/2;
   eyb = ey+50/2;
   eys = ey-50/2;
-  bxb = bulletx+30/2;
-  bxs = bulletx+30/2;
-  byb = bullety+30/2;
-  bys = bullety+30/2;
+  bxb = bulletx+60/2;
+  bxs = bulletx+60/2;
+  byb = bullety+60/2;
+  bys = bullety+60/2;
   pxb = px+80/2;
   pxs = px+80/2;
   pyb = py+80/2;
