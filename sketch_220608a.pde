@@ -9,11 +9,12 @@ float ey;
 Particle p;
 int score =0;
 int life =3;
-float targetx = 0,targety = 0;
+float targetx = 140,targety = 240;
 boolean isshoot = false;
 boolean iskeypressedfirst = true;
 boolean isfirst = true;
 float px1,px2,py1,py2,ex1,ex2,ey1,ey2,bx1,bx2,by1,by2;
+
 void setup() {
   size(640, 480);
    bullet = loadImage("img/bullet.png");
@@ -33,7 +34,10 @@ image(enemy, ex, ey, 50, 50);
   y+=(targety-y);
 
    keyPressed();
+   
 image( player, x, y, 80, 80);
+
+///////bullet fly
   if (isshoot) {
     if (isfirst) {
       p = new Particle(new PVector(x, y-10));
@@ -41,37 +45,42 @@ image( player, x, y, 80, 80);
     }
     p.run();
   }
+/////////
 
+//////emeny move
    ex-=5;
   if (ex==-50) {
     ex=640;
     ey=floor(random(0, 430));
   }
-  
-  text("Score:"+score, 10, 10);
-  text("life:"+life, 10, 30);
-  
-  text("x:"+x, 10, 50);
-  text("y:"+y, 10, 70);
-  
-  text("ex:"+ex, 10, 90);
-  text("ey:"+ey, 10, 110);
-  
-  
+//////
 
-  if (life<0)
+//////text
+  text("Score:"+score, 10, 20);
+  text("life:"+life, 10, 40);
+  textSize(20);
+//////  
+ 
+  
+  
+/////juduge win or lose
+  if (life<0){
     text("gave over", 310, 240);
-
-  else if (score>=500)
+   }
+  else if (score>=10){
     text("win", 320, 240);
-    
+   }
+ /////  
 }
 
+/////enemy spwan
 void enemyranpos() {
   ex=640;
   ey=floor(random(0, 430));
 }
+//////
 
+/////control
 void keyPressed() {
   if (keyPressed) {
     if (key == 'w'||key == 'W') {
@@ -106,7 +115,9 @@ void mouseReleased() {
     }
   
 }
+/////
 
+/////bullet
 class Particle {
   PVector location;
   PVector velocity;
@@ -123,8 +134,7 @@ class Particle {
   void run() {
     update();
 image(bullet, location.x, location.y, 100, 100);
-text("bulletx:"+p.location.x,10,130);
-text("bullety:"+p.location.y,10,150);
+
   }
   
   void update() {
@@ -152,6 +162,7 @@ text("bullety:"+p.location.y,10,150);
     ex2 = ex+80;
     ey1 =ey;
     ey2 =ey+80;
+    
     bx1 = location.x;
     bx2 = location.x+80;
     by1 = location.y;
