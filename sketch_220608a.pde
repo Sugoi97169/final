@@ -143,15 +143,7 @@ image(bullet, location.x, location.y, 100, 100);
     lifespan-=1.0;
     boom();
   }
-
-  boolean isDead() {
-    if (lifespan<=0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
+ 
   void boom() {
     px1 =x;//minx
     px2 =x+80;//maxx
